@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Extensions.Options;
 
 namespace CPA_RoundRobin.Services;
@@ -46,9 +47,11 @@ public class HealthCheckService : BackgroundService
     {
         try
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("RoundRobinClient");
+            var timer = Stopwatch.StartNew();
             var response = await client.GetAsync(instance);
-            return response.IsSuccessStatusCode;
+            timer.Stop();
+            return response.IsSuccessStatusCode && timer.ElapsedMilliseconds < 3000;
         }
         catch
         {
