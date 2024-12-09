@@ -1,3 +1,5 @@
+# CPA
+
 # CPA-JsonHandler API
 
 This is a simple .NET Core application API that accepts an HTTP POST request with any JSON payload and returns a success response containing an exact copy of the JSON request.
@@ -33,7 +35,7 @@ Example Response:
     "key": "value"
 }
 
-### **Round Robin API: README.md**
+### **Round Robin API**
 
 ```markdown
 # CPA Round Robin API
@@ -66,7 +68,7 @@ The list of Application API instances is stored in `appsettings.json`. Update th
 ```
 
 ## How to Run
-	1.	Clone the repository and navigate to the RoundRobinAPI folder.
+	1.	Clone the repository and navigate to the `CPA-RoundRobin` folder.
 	2.	Restore dependencies and build the project:
 
 dotnet restore
