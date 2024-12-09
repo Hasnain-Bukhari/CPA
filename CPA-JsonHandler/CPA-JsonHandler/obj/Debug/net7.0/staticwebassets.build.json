@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BLrWCRieRIAUe57osG+EKxSDIVZUj7P0BFIoiUVlvQk=",
+  "Source": "CPA-JsonHandler",
+  "BasePath": "_content/CPA-JsonHandler",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
