@@ -1,8 +1,4 @@
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace CPA_RoundRobin.Services;
 public class HealthCheckService : BackgroundService
@@ -12,17 +8,11 @@ public class HealthCheckService : BackgroundService
     private readonly List<string> _appInstances;
     public static List<string> HealthyInstances { get; private set; } = new();
 
-    public HealthCheckService(IHttpClientFactory httpClientFactory, ILogger<HealthCheckService> logger)
+    public HealthCheckService(IHttpClientFactory httpClientFactory, ILogger<HealthCheckService> logger, IOptions<ApplicationSettings> settings)
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
-        _appInstances = new List<string>
-        {
-            "http://localhost:5041/api/jsonhandler",
-            "http://localhost:5042/api/jsonhandler",
-            "http://localhost:5043/api/jsonhandler",
-            "http://localhost:5044/api/jsonhandler",
-        };
+        _appInstances = settings.Value.AppInstances;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -47,7 +37,7 @@ public class HealthCheckService : BackgroundService
 
             HealthyInstances = healthyInstances;
 
-            // Wait for the next health check (e.g., 10 seconds)
+            // Wait for the next health check - 5 seconds interval
             await Task.Delay(5000, stoppingToken);
         }
     }
